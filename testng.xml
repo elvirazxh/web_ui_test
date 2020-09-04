@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="tests" thread-count="2">
+    <listeners>
+        <!-- 生成报告用 -->
+        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
+        <listener class-name="com.creditease.zxh.util.TestCaseReport"></listener>
+    </listeners>
+    <parameter name="browser" value="chrome"/> <!--全局变量 -->
+
+    <test verbose="2" preserve-order="true" name="/Users/admin/Documents/zhaoxuhua/autotest/ui_web_test">
+        <parameter name="username" value="15210345751"/>
+        <parameter name="password" value="sz19870129zxh"/>
+        <parameter name="url" value="https://www.imooc.com"/>
+        <groups>
+            <run>
+                <include name="success"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.creditease.zxh.cases.LoginCase">
+                <methods>
+                    <include name="test01"/>
+                    <include name="test02"/>
+                    <include name="testLoginSuccess"/>
+                    <include name="testLoginError"/>
+                    <!--<exclude name="testLoginError"/>&lt;!&ndash;跳过执行 &ndash;&gt;-->
+                </methods>
+
+            </class>
+        </classes>
+    </test><!-- test -->
+
+
+    <test name="course">
+        <parameter name="url" value="https://coding.imooc.com/class/303.html"/>
+        <parameter name="coursename" value="剑指Java面试-Offer直通车"/>
+        <classes>
+            <class name="com.creditease.zxh.cases.AddCourseCase">
+                <methods><include name="testAddCourseSuccess"/></methods>
+                <methods><include name="testAlreadyLogin"/></methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="payOrder">
+        <parameter name="url" value="https://order.imooc.com/pay/confirm?goods_ids=2173"/>
+        <classes>
+            <class name="com.creditease.zxh.cases.PayOrderCase">
+                <methods>
+                    <include name="payOrder"/>
+                    <include name="loginPayOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+
+
+</suite><!-- suite -->
